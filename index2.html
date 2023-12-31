@@ -13,43 +13,6 @@
         overflow: hidden;
         background-color: black; /* ou qualquer cor de fundo de sua escolha */
     }
-
-        .buttons-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px; /* Espaço entre os botões */
-            position: absolute;
-            top: 40%; /* Ajuste este valor conforme necessário para posicionar abaixo do countdown */
-            width: 100%; /* Isso garante que o contêiner ocupe toda a largura */
-        }
-
-        .buttons-container button {
-        padding: 10px 15px;
-        font-size: 1em;
-        cursor: pointer;
-        border: none; /* Remove a borda padrão */
-        border-radius: 5px; /* Bordas arredondadas */
-        color: white; /* Cor do texto */
-        transition: transform 0.3s; /* Animação suave ao clicar */
-    }
-
-    .buttons-container button:hover {
-        transform: scale(1.1); /* Efeito de zoom ao passar o mouse */
-    }
-
-    #fireHeartButton {
-        background-color: #ff4081; /* Cor rosa moderna */
-    }
-
-    #fireFullCircleButton {
-        background-color: #3f51b5; /* Cor azul moderna */
-    }
-
-    #fireSparkButton {
-        background-color: #4caf50; /* Cor verde moderna */
-    }
-
         canvas {
             display: block;
         }
@@ -62,11 +25,9 @@
         <p style="font-size: 0.25em; margin-top: 0.5em;">Veja a animação em 2024!</p>
     </div>
 
-    <div class="buttons-container">
-        <button id="fireHeartButton">💖</button>
-        <button id="fireFullCircleButton">🔵</button>
-        <button id="fireSparkButton">✨</button>
-    </div>
+    <button id="fireHeartButton" style="position: absolute; top: 38%; left: 49%">💖</button>
+    <button id="fireFullCircleButton"style="position: absolute; top: 38%; left: 46%">🔵</button>
+    <button id="fireSparkButton" style="position: absolute; top: 38%; left: 52%">✨</button>
 
     
     <canvas id="fireworks"></canvas>
