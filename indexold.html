@@ -19,7 +19,6 @@
     </style>
 </head>
 <body>
-    <audio id="newYearAudio" src="C:\Users\igor1\Desktop\Codigos\Produtividade\App Register Diario\Midias\in-the-end-all-20101.mp3"></audio>
     <div id="countdown" style="position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 3em; font-family:  'Muli', sans-serif; text-align: center;">
         <span id="timer"></span>
         <p style="font-size: 0.25em; margin-top: 0.5em;">Veja a animação em 2024!</p>
@@ -27,46 +26,44 @@
 
     <button id="fireHeartButton" style="position: absolute; top: 38%; left: 49%">💖</button>
     <button id="fireFullCircleButton"style="position: absolute; top: 38%; left: 46%">🔵</button>
-    <button id="fireSparkButton" style="position: absolute; top: 38%; left: 52%">✨</button>
+    <button id="fireSparkButton"style="position: absolute; top: 38%; left: 52%">✨</button>
 
-    
     <canvas id="fireworks"></canvas>
     <script>
+
         document.getElementById('fireHeartButton').addEventListener('click', function() {
-        launchFirework(0, 'middle', false); // Coração no meio
-    });
+            launchFirework(0, 'middle'); // Coração no meio
+        });
 
-    document.getElementById('fireFullCircleButton').addEventListener('click', function() {
-        launchFirework(0.5, 'left', false); // Círculo completo na esquerda
-    });
+        document.getElementById('fireFullCircleButton').addEventListener('click', function() {
+            launchFirework(0.5, 'left'); // Círculo completo na esquerda
+        });
 
-    document.getElementById('fireSparkButton').addEventListener('click', function() {
-        launchFirework(0.7, 'right', false); // Spark na direita
-    });
+        document.getElementById('fireSparkButton').addEventListener('click', function() {
+            launchFirework(0.7, 'right'); // Spark na direita
+        });
 
-    function launchFirework(specialType, position, isAutomatic) {
-        let x;
-        switch(position) {
-            case 'left':
-                x = window.innerWidth * 0.25;
-                break;
-            case 'right':
-                x = window.innerWidth * 0.75;
-                break;
-            default:
-                x = window.innerWidth / 2;
+        function launchFirework(specialType, position) {
+            let x;
+            switch(position) {
+                case 'left':
+                    x = window.innerWidth * 0.25;
+                    break;
+                case 'right':
+                    x = window.innerWidth * 0.75;
+                    break;
+                default:
+                    x = window.innerWidth / 2;
+            }
+
+            const y = window.innerHeight;
+            const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
+            const firework = new Firework(x, y, color);
+            firework.isSpecial = specialType;
+            fireworks.push(firework);
         }
 
-        const y = window.innerHeight;
-        const color = isAutomatic ? 'hsl(120, 50%, 50%)' : `hsl(${Math.random() * 360}, 50%, 50%)`;
 
-        const firework = new Firework(x, y, color, isAutomatic);
-        firework.isSpecial = specialType;
-        
-        fireworks.push(firework);
-    }
-        
-        
         const canvas = document.getElementById('fireworks');
         const ctx = canvas.getContext('2d');
 
@@ -101,7 +98,7 @@
         }
 
         class Firework {
-            constructor(x, y, color, isAutomatic) {
+            constructor(x, y, color) {
                 this.x = x;
                 this.y = y;
                 this.color = color;
@@ -110,7 +107,6 @@
                 this.lifespan = 180;
                 this.hasExploded = false;
                 this.isSpecial = Math.random();
-                this.isAutomatic = isAutomatic;
             }
 
             draw() {
@@ -151,8 +147,8 @@
             }
         }
 
-        function makeHeartFirework(fire, color) {
-            // var color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+        function makeHeartFirework(fire) {
+            var color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
             var max = 130;
             var velocityScale = 0.5;
 
@@ -160,15 +156,15 @@
                 var t = (i * Math.PI * 2) / max - Math.PI;
                 var x = 16 * Math.pow(Math.sin(t), 3);
                 var y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
-                var firework = new Particle(fire.x, fire.y, fire.color);
+                var firework = new Particle(fire.x, fire.y, color);
                 firework.velocity = { x: x * velocityScale, y: y * velocityScale };
                 firework.alpha = 1;
                 fire.particles.push(firework);
             }
         }
 
-        function makeFullCircleFirework(fire, color) {
-            // var color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+        function makeFullCircleFirework(fire) {
+            var color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
             var max = 100;
             for (var i = 0; i < max; i++) {
                 var angle = Math.random() * Math.PI * 2;
@@ -176,13 +172,13 @@
                     x: Math.cos(angle) * 10,
                     y: Math.sin(angle) * 10
                 };
-                var particle = new Particle(fire.x, fire.y, fire.color, velocity);
+                var particle = new Particle(fire.x, fire.y, color, velocity);
                 fire.particles.push(particle);
             }
         }
 
 
-        function makeSpark(fire, color) {
+        function makeSpark(fire) {
             var max = 100;
             for (var i = 0; i < max; i++) {
                 var angle = Math.random() * Math.PI * 2;
@@ -201,27 +197,20 @@
             requestAnimationFrame(animate);
             ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            fireworks.forEach((firework, index) => {
-            firework.update();
-            firework.draw();
-            if (firework.hasExploded && firework.particles.length === 0) {
-                fireworks.splice(index, 1);
-            }
-        });
-            if (AnoNovo != true & Math.random() < 0.1) {
-                const x = Math.random() * canvas.width;
-                const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
-                const alpha = 0; 
-                const color2 = `hsla(120, 50%, 50%, ${alpha})`;
-                fireworks.push(new Firework(x, canvas.height, color2, true));
-            }
-            else if (AnoNovo == true & Math.random() < 0.1){
-                const x = Math.random() * canvas.width;
-                const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
-                const alpha = 1; 
-                fireworks.push(new Firework(x, canvas.height, color, true));
-
-            }
+            if (AnoNovo == true){
+            // Parte dos fogos
+                fireworks.forEach((firework, index) => {
+                    firework.update();
+                    firework.draw();
+                    if (firework.hasExploded && firework.particles.length === 0) {
+                        fireworks.splice(index, 1);
+                    }
+                });
+                if (Math.random() < 0.02) {
+                    const x = Math.random() * canvas.width;
+                    const color = `hsl(${Math.random() * 360}, 50%, 50%)`;
+                    fireworks.push(new Firework(x, canvas.height, color));
+                }}
         }
 
         animate();
@@ -247,7 +236,6 @@
 
         const countdownInterval = setInterval(updateCountdown, 1000);
         updateCountdown();
-
     </script>
 </body>
 </html>
