@@ -6,14 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fireworks Simulator</title>
     <style>
+        @import url('https://fonts.googleapis.com/css?family=Baloo+Thambi|Muli|Righteous');
+        body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: black; /* ou qualquer cor de fundo de sua escolha */
+    }
         canvas {
             display: block;
         }
     </style>
 </head>
 <body>
-    <div id="countdown" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 3em; text-align: center;">
+    <div id="countdown" style="position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 3em; font-family:  'Muli', sans-serif; text-align: center;">
         <span id="timer"></span>
+        <p style="font-size: 0.25em; margin-top: 0.5em;">Veja a animação em 2024!</p>
     </div>
     
     <canvas id="fireworks"></canvas>
@@ -172,7 +180,7 @@
 
         
         function updateCountdown() {
-            const now = new Date('2024-01-01T00:00:00');
+            const now = new Date();
             const newYear = new Date('2024-01-01T00:00:00'); // 1º de janeiro de 2024 às 00:00
             const diff = newYear - now;
             const hours = Math.floor(diff / 1000 / 60 / 60) % 24;
@@ -180,8 +188,8 @@
             const seconds = Math.floor(diff / 1000) % 60;
 
             document.getElementById('timer').innerText = 
-                `Ano Novo 1em: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            if (diff <= 11) {
+                `Ano Novo em: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            if (diff <= 1) {
                 clearInterval(countdownInterval);
                 document.getElementById('timer').innerText = "Feliz Ano Novo!";
                 AnoNovo = true
