@@ -111,10 +111,12 @@
 
     document.getElementById('fireFullCircleButton').addEventListener('click', function() {
         launchFirework(0.5, 'left', false); // Círculo completo na esquerda
+        document.getElementById('newYearAudio').play();
     });
 
     document.getElementById('fireSparkButton').addEventListener('click', function() {
         launchFirework(0.7, 'right', false); // Spark na direita
+        document.getElementById('newYearAudio').play();
     });
 
     function launchFirework(specialType, position, isAutomatic) {
