@@ -13,6 +13,16 @@
         overflow: hidden;
         background-color: black; /* ou qualquer cor de fundo de sua escolha */
     }
+    #TextLaunch p {
+        position: absolute;
+        top: 26vh;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 1em;
+        font-family: 'Muli', sans-serif;
+        text-align: center;
+    }
 
         .buttons-container {
             display: flex;
@@ -51,16 +61,24 @@
     }
     @media (max-width: 1050px) {
     .buttons-container {
-        top: 26vh; /* Ajuste a posição para telas menores */
+        top: 29vh; /* Ajuste a posição para telas menores */
         height: 25vh; /* Aumenta a altura para 25vh em telas de smartphones */
     }
+    #TextLaunch p {
+            top: 31.5vh; /* Ajuste a altura para telas de smartphones */
+            font-size: 1.2em; /* Opcional: ajuste o tamanho da fonte para telas menores */
+        }
 }
-@media (max-width: 575px) {
-    .buttons-container {
-        top: 33vh; /* Ajuste a posição para telas menores */
-        height: 25vh; /* Aumenta a altura para 25vh em telas de smartphones */
+    @media (max-width: 575px) {
+        .buttons-container {
+            top: 37vh; /* Ajuste a posição para telas menores */
+            height: 25vh; /* Aumenta a altura para 25vh em telas de smartphones */
+        }
+        #TextLaunch p {
+            top: 39.5vh; /* Ajuste a altura para telas de smartphones */
+            font-size: 1.2em; /* Opcional: ajuste o tamanho da fonte para telas menores */
+        }
     }
-}
 
         canvas {
             display: block;
@@ -73,6 +91,9 @@
         <span id="timer"></span>
         <p style="font-size: 0.35em; margin-top: 0.5em;">Veja a animação no fim da contagem!</p>
     </div>
+
+    <div id="TextLaunch">
+        <p style="position: absolute; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 1em; font-family:  'Muli', sans-serif; text-align: center;">Clique para lançar</p></div>
 
     <div class="buttons-container">
         <button id="fireHeartButton">💖</button>
