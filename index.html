@@ -86,7 +86,7 @@
     </style>
 </head>
 <body>
-    <audio id="newYearAudio" src="C:\Users\igor1\Desktop\Codigos\Produtividade\App Register Diario\Midias\in-the-end-all-20101.mp3"></audio>
+    <audio id="newYearAudio" src="Fogos.mp3"></audio>
     <div id="countdown" style="position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 3em; font-family:  'Muli', sans-serif; text-align: center;">
         <span id="timer"></span>
         <p style="font-size: 0.35em; margin-top: 0.5em;">Veja a animação no fim da contagem!</p>
@@ -106,6 +106,7 @@
     <script>
         document.getElementById('fireHeartButton').addEventListener('click', function() {
         launchFirework(0, 'middle', false); // Coração no meio
+        document.getElementById('newYearAudio').play();
     });
 
     document.getElementById('fireFullCircleButton').addEventListener('click', function() {
