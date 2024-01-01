@@ -12,6 +12,8 @@
         padding: 0;
         overflow: hidden;
         background-color: black; /* ou qualquer cor de fundo de sua escolha */
+        background: url('Relogio.png') no-repeat center center fixed; /* Define a imagem de fundo */
+        background-size: cover; /* Faz a imagem cobrir toda a tela */
     }
     #TextLaunch p {
         position: absolute;
@@ -82,6 +84,10 @@
 
         canvas {
             display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
         }
     </style>
 </head>
@@ -274,7 +280,7 @@
         AnoNovo = false
         function animate() {
             requestAnimationFrame(animate);
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillStyle = 'rgba(0, 0, 55, 0.1)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             fireworks.forEach((firework, index) => {
             firework.update();
